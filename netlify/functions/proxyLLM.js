@@ -9,7 +9,7 @@ export async function handler(event, context) {
     };
   }
 
-  const backendUrl = "http://13.236.134.69:8000/api/generate"; // Your EC2 URL
+  const backendUrl = "http://3.25.163.190:8000/api/generate"; // Your EC2 URL
   const body = JSON.parse(event.body);
 
   try {
