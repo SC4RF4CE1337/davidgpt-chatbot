@@ -3,7 +3,8 @@ export async function callLLM(messages) {
   const latestMessage = messages[messages.length - 1].content;
 
   try {
-    const response = await fetch("/.netlify/functions/proxyLLM", {
+    // Update the endpoint to your Vercel serverless function
+    const response = await fetch("/api/proxyLLM", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
