@@ -1,24 +1,37 @@
 // api/proxyLLM.js
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+  if (req.method !== "POST") {
+    return res.status(405).send("Method Not Allowed");
+  }
 
   const { question } = req.body;
 
-  // Use the environment variable for your backend URL
-  const apiUrl = process.env.LLM_BACKEND_URL; 
-  // In Vercel dashboard, set LLM_BACKEND_URL = "http://16.176.51.19:8000/api/generate"
+  if (!question || question.trim() === "") {
+    return res.status(400).json({ response: "Question is required." });
+  }
 
   try {
-    const backendResponse = await fetch(apiUrl, {
+    // Use environment variable for your backend
+    const backendUrl = process.env.LLM_BACKEND_URL;
+
+    if (!backendUrl) {
+      return res.status(500).json({ response: "Backend URL not configured." });
+    }
+
+    const backendResponse = await fetch(backendUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question }),
     });
 
+    if (!backendResponse.ok) {
+      throw new Error(`Backend returned status ${backendResponse.status}`);
+    }
+
     const data = await backendResponse.json();
     res.status(200).json({ response: data.response });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ response: "⚠️ Something went wrong while fetching the AI response." });
+    console.error("Error calling backend:", err);
+    res.status(500).json({ response: "⚠️ Something went wrong fetching AI response." });
   }
 }
