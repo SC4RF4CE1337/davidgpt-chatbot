@@ -9,7 +9,7 @@ export async function handler(event, context) {
     };
   }
 
-  const backendUrl = "http://16.176.51.19:8000/api/generate"; //  EC2 URL
+  const backendUrl = ""; //  YOUR EC2 URL (FastAPI)
   const body = JSON.parse(event.body);
 
   try {
