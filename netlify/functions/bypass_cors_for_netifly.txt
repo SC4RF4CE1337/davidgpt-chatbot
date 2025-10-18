@@ -1,0 +1,4 @@
+CORS (Cross-Origin Resource Sharing) is a security rule built into web browsers.
+It controls which websites are allowed to talk to each other using HTTP requests.
+
+Basically, it stops random websites from secretly calling your backend and stealing data.
