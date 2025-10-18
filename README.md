@@ -6,7 +6,7 @@
 
 ## ⚙️ Stack
 - **Frontend:** ReactJS + TailwindCSS (Netlify)
-- **Backend:** Python FastAPI)
+- **Backend:** Python (FastAPI)
 - **Model:** microsoft/DialoGPT-small
 - **MLOps:** Databricks + MLflow
 - **Proxy:** Netlify Functions (fix CORS)
